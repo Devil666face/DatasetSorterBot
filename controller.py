@@ -53,17 +53,17 @@ class Controller:
         photo_path = self.db.get_photo_path_by_id(id)
         photo_name = photo_path.split('/')[-1]
         os.replace(photo_path,self.first_folder+photo_name)
-        print(photo_path)
+        print(f"[Изменение фото] {photo_path} перемещено в military")
 
     def move_to_civil(self, id):
         photo_path = self.db.get_photo_path_by_id(id)
         photo_name = photo_path.split('/')[-1]
         os.replace(photo_path,self.second_folder+photo_name)
-        print(photo_path)
+        print(f"[Изменение фото] {photo_path} перемещено в civil")
 
     def delete(self, id):
         photo_path = self.db.get_photo_path_by_id(id)
-        print(photo_path.split('/')[-1])
         os.remove(photo_path)
+        print(f"[Изменение фото] {photo_path} удалено")
 
         

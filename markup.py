@@ -10,7 +10,7 @@ class Keyboards:
         self.db = DB
 
     def keyboard_create_main_buttons(self, user_id):
-        main_button = ['Начать выдачу','Остановить выдачу','Статистика','Помощь']
+        main_button = ['Начать выдачу','Остановить выдачу']
         if user_id in self.db.get_admin_id():
             main_button.append('Добавить фото в БД')
         keyboard_main = types.ReplyKeyboardMarkup(resize_keyboard=True) 

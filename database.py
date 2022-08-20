@@ -91,3 +91,7 @@ class Database:
     def get_photo_path_by_id(self, id):
         self.cursor.execute(f"SELECT photo_path FROM Photo WHERE id={id}")
         return str(self.cursor.fetchone()[0])
+
+    def get_status(self, id):
+        self.cursor.execute(f"SELECT active FROM User WHERE id={id}")
+        return bool(self.cursor.fetchone()[0])

@@ -50,42 +50,49 @@ async def indexing_db(message: types.Message, state: FSMContext):
 async def help(message: types.Message, state: FSMContext):
     db.update_active_status(id=message.from_user.id,status=True)
     await message.answer('Начинаю выдачу датасета',reply_markup=kb.keyboard_create_main_buttons(message.from_user.id))
-    photo_path, keyboard_inline = controller.get_question()
-    if photo_path:
-        await message.answer_photo(open(photo_path,'rb'),reply_markup=keyboard_inline)
+    # photo_path, keyboard_inline = controller.get_question()
+    # if photo_path:
+    #     await message.answer_photo(open(photo_path,'rb'),reply_markup=keyboard_inline)
+
+    await get_new_question(message.from_user.id)
 
 
 @dp.callback_query_handler(text_contains="military_")
 async def check(call: types.CallbackQuery):
     id = int(call.data.split('_')[2])
     controller.move_to_military(id)
+    await bot.delete_message(call.from_user.id, call.message.message_id)
+    await get_new_question(call.from_user.id)
+
 
 @dp.callback_query_handler(text_contains="civil_")
 async def check(call: types.CallbackQuery):
     id = int(call.data.split('_')[2])
     controller.move_to_civil(id)
+    await bot.delete_message(call.from_user.id, call.message.message_id)
+    await get_new_question(call.from_user.id)
 
 
 @dp.callback_query_handler(text_contains="delete_")
 async def check(call: types.CallbackQuery):
     id = int(call.data.split('_')[2])
     controller.delete(id)
+    await bot.delete_message(call.from_user.id, call.message.message_id)
+    await get_new_question(call.from_user.id)
+
+
+async def get_new_question(user_id):
+    if db.get_status(user_id):
+        photo_path, keyboard_inline = controller.get_question()
+        if photo_path:
+            await bot.send_photo(user_id, open(photo_path,'rb'),reply_markup=keyboard_inline)
+    
 
 
 @dp.message_handler(Text(equals='Остановить выдачу'))
 async def help(message: types.Message, state: FSMContext):
     db.update_active_status(id=message.from_user.id,status=False)
     await message.answer('Выдача остановлена',reply_markup=kb.keyboard_create_main_buttons(message.from_user.id))
-
-
-@dp.message_handler(Text(equals='Статистика'))
-async def stat(message: types.Message, state: FSMContext):
-    await message.answer('Заглушка Статистика',reply_markup=kb.keyboard_create_main_buttons(message.from_user.id))
-
-
-@dp.message_handler(Text(equals='Помощь'))
-async def help(message: types.Message, state: FSMContext):
-    await message.answer('Заглушка Помощь',reply_markup=kb.keyboard_create_main_buttons(message.from_user.id))
 
 
 @dp.message_handler(content_types=['text'],state=None)
