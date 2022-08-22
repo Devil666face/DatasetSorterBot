@@ -1,5 +1,4 @@
 import sqlite3, os
-from types import NoneType
 from xmlrpc.client import Boolean
 from aiogram import types
 from threading import Thread
