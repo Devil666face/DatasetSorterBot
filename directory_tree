@@ -1,0 +1,35 @@
+Dataset/
+├── NotSorted
+└── Sorted
+    ├── Allowed
+    │   ├── Atributes
+    │   ├── FieldUniform
+    │   ├── Generals
+    │   ├── Other
+    │   ├── PolarUniform
+    │   ├── Sv
+    │   ├── SvUniform
+    │   ├── Vdv
+    │   ├── VdvUniform
+    │   ├── Vks
+    │   ├── VksUniform
+    │   ├── Vmf
+    │   └── VmfUniform
+    ├── Civil
+    ├── NotAllowed
+    │   ├── FieldUniform
+    │   ├── Generals
+    │   ├── Other
+    │   ├── PolarUniform
+    │   ├── Sv
+    │   ├── SvUniform
+    │   ├── Vdv
+    │   ├── VdvUniform
+    │   ├── Vks
+    │   ├── VksUniform
+    │   ├── Vmf
+    │   └── VmfUniform
+    └── Vehicles
+        ├── Aviation
+        ├── Engine
+        └── Navy

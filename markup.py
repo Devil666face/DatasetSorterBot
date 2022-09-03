@@ -1,9 +1,9 @@
-import aiogram
 from database import Database
 from aiogram import types
 from aiogram.types import ReplyKeyboardRemove,ReplyKeyboardMarkup,KeyboardButton,InlineKeyboardMarkup,InlineKeyboardButton
 from aiogram.types.message import ContentTypes
 from aiogram.types.message import ContentType
+from tree_dict import tree_dict, get_translate
 
 class Keyboards:
     def __init__(self, DB:Database):
@@ -17,12 +17,18 @@ class Keyboards:
         keyboard_main.add(*main_button)
         return keyboard_main
 
-    def keyboard_create_inline_selector(self, photo_path:str, first_folder='military', second_folder='civil', delete='delete'):
+    def create_global_selector(self, photo_path):
         id = self.db.get_photo_id_by_path(photo_path)
         inline_keyboard = types.InlineKeyboardMarkup()
-        inline_keyboard.add(types.InlineKeyboardButton(text=f'{first_folder}',callback_data=f'inline_{first_folder}_{id}'))
-        inline_keyboard.add(types.InlineKeyboardButton(text=f'{second_folder}',callback_data=f'inline_{second_folder}_{id}'))
-        inline_keyboard.add(types.InlineKeyboardButton(text=f'{delete}',callback_data=f'inline_{delete}_{id}'))
+        for key in tree_dict:
+            inline_keyboard.add(types.InlineKeyboardButton(text=get_translate(key),callback_data=f'global_{key}_{id}'))
         return inline_keyboard
+
+    def create_local_selector(self, id, global_class_name):
+        inline_keyboard = types.InlineKeyboardMarkup()
+        for item in tree_dict[global_class_name]:
+            inline_keyboard.add(types.InlineKeyboardButton(text=get_translate(item),callback_data=f'local_{item}_{id}'))
+        return inline_keyboard
+
 
     
