@@ -11,11 +11,11 @@ class Controller:
         self.kb = KB
         self.Not_sorted = Path(os.getcwd(),'Dataset','NotSorted')
         
-    async def add_path_to_db(self):
+    def add_path_to_db(self):
         try:
             self.remove_bad_photo(self.Not_sorted)
             self.db.clear_table(table_name='Photo')
-            await self.db.add_photos_to_table(table_name='Photo',path_to_photo_folder=self.Not_sorted)
+            self.db.add_photos_to_table(table_name='Photo',path_to_photo_folder=self.Not_sorted)
             return True
         except Exception as error:
             print(f"[Ошибка заполнения базы данных] {error}")

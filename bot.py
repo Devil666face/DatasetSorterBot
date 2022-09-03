@@ -36,7 +36,7 @@ async def start(message: types.Message):
 async def indexing_db(message: types.Message, state: FSMContext):
     if message.from_user.id in db.get_admin_id():
         await message.answer('Начинаю добавление новых фото в БД. Процесс займет много времени.',reply_markup=kb.keyboard_create_main_buttons(message.from_user.id))
-        await message.answer('Успешно.') if await controller.add_path_to_db() else await message.answer('Ошибка обновления базы.')   
+        await message.answer('Успешно.') if controller.add_path_to_db() else await message.answer('Ошибка обновления базы.')   
     else:
         await message.answer('У вас недостаточно прав для выполенния данных действий',reply_markup=kb.keyboard_create_main_buttons(message.from_user.id))
 

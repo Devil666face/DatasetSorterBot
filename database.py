@@ -1,6 +1,5 @@
 from pathlib import Path
 import sqlite3
-import aiosqlite
 import os
 from xmlrpc.client import Boolean
 from aiogram import types
@@ -46,21 +45,18 @@ class Database:
                 self.connection.commit()
 
   
-    async def add_photos_to_table(self, table_name, path_to_photo_folder):
-        connection = await aiosqlite.connect(self.db_name)
-        cursor = await connection.cursor()
+    def add_photos_to_table(self, table_name, path_to_photo_folder):
         list_photo = os.listdir(path_to_photo_folder)
         try:
             for photo in list_photo:
-                await self.add_photo(cursor, table_name, path_to_photo = str(Path(path_to_photo_folder,photo)))
+                self.add_photo(self.cursor, table_name, path_to_photo = str(Path(path_to_photo_folder,photo)))
         finally:
-            await connection.commit()
-            await connection.close()
+            self.connection.commit()
             print('[Фото добавлены в базу]')
 
-    async def add_photo(self, cursor, table_name, path_to_photo):
+    def add_photo(self, cursor, table_name, path_to_photo):
         try:
-            await cursor.execute(f"INSERT INTO {table_name} (photo_path) VALUES (?)", (path_to_photo,))
+            cursor.execute(f"INSERT INTO {table_name} (photo_path) VALUES (?)", (path_to_photo,))
         except Exception as error:
             print(f'[Ошибка добавления фото в базу] {error}')
             
