@@ -2,34 +2,36 @@ Dataset/
 ├── NotSorted
 └── Sorted
     ├── Allowed
-    │   ├── Atributes
-    │   ├── FieldUniform
-    │   ├── Generals
-    │   ├── Other
-    │   ├── PolarUniform
-    │   ├── Sv
-    │   ├── SvUniform
-    │   ├── Vdv
-    │   ├── VdvUniform
-    │   ├── Vks
-    │   ├── VksUniform
-    │   ├── Vmf
-    │   └── VmfUniform
+    │   ├── Atributes
+    │   ├── FieldUniform
+    │   ├── Generals
+    │   ├── Other
+    │   ├── PolarUniform
+    │   ├── SvOffice
+    │   ├── SvUniform
+    │   ├── VdvOffice
+    │   ├── VdvUniform
+    │   ├── VksOffice
+    │   ├── VksUniform
+    │   ├── VmfOffice
+    │   └── VmfUniform
     ├── Civil
     ├── NotAllowed
-    │   ├── FieldUniform
-    │   ├── Generals
-    │   ├── Other
-    │   ├── PolarUniform
-    │   ├── Sv
-    │   ├── SvUniform
-    │   ├── Vdv
-    │   ├── VdvUniform
-    │   ├── Vks
-    │   ├── VksUniform
-    │   ├── Vmf
-    │   └── VmfUniform
+    │   ├── FieldUniform
+    │   ├── Generals
+    │   ├── Other
+    │   ├── PolarUniform
+    │   ├── SvOffice
+    │   ├── SvUniform
+    │   ├── VdvOffice
+    │   ├── VdvUniform
+    │   ├── VksOffice
+    │   ├── VksUniform
+    │   ├── VmfOffice
+    │   └── VmfUniform
     └── Vehicles
         ├── Aviation
         ├── Engine
         └── Navy
+
+34 directories

@@ -44,7 +44,8 @@ async def indexing_db(message: types.Message, state: FSMContext):
 @dp.message_handler(Text(equals='Начать выдачу'))
 async def get_photo(message: types.Message, state: FSMContext):
     db.update_active_status(id=message.from_user.id,status=True)
-    await get_global_question(message.from_user.id)
+    for i in range(10): #Закоментить если рекурсивная выдача
+        await get_global_question(message.from_user.id)
 
 async def get_global_question(user_id):
     if db.get_status(user_id):
@@ -63,7 +64,7 @@ async def set_global_class(call: types.CallbackQuery):
         # Вернулся False поэтому делаем рекурсию и задаем следующий глобальный вопрос для этого же фото
         # Распределяем фото в нужную папку
         controller.move_photo(photo_id)
-        await get_global_question(call.from_user.id) 
+        # await get_global_question(call.from_user.id) #Рекурсия 
 
 async def get_local_question(user_id, photo_id, global_class_name):
     photo_path, keyboard_inline = controller.get_local_question(photo_id, global_class_name)
@@ -78,7 +79,7 @@ async def set_local_class(call: types.CallbackQuery):
     # Распределяем фото в нужную папку
     controller.move_photo(photo_id)
     # Рекурсивно сново задаем глобальный вопрос
-    await get_global_question(call.from_user.id) 
+    # await get_global_question(call.from_user.id) #Рекурсия
 
 @dp.message_handler(Text(equals='Остановить выдачу'))
 async def help(message: types.Message, state: FSMContext):
