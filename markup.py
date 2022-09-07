@@ -20,16 +20,19 @@ class Keyboards:
 
     def create_global_selector(self, photo_path):
         id = self.db.get_photo_id_by_path(photo_path)
-        inline_keyboard = types.InlineKeyboardMarkup(row_width=3)
+        inline_keyboard = types.InlineKeyboardMarkup(row_width=2)
         
-        for key in tree_dict:
-            inline_keyboard.add(*[types.InlineKeyboardButton(text=get_translate(key),callback_data=f'global_{key}_{id}')])
+        # for key in tree_dict:
+        #     inline_keyboard.add(*[types.InlineKeyboardButton(text=get_translate(key),callback_data=f'global_{key}_{id}')])
+        inline_keyboard.add(*[types.InlineKeyboardButton(text=get_translate(key),callback_data=f'global_{key}_{id}') for key in tree_dict])
         return inline_keyboard
 
     def create_local_selector(self, id, global_class_name):
-        inline_keyboard = types.InlineKeyboardMarkup()
-        for item in tree_dict[global_class_name]:
-            inline_keyboard.add(types.InlineKeyboardButton(text=get_translate(item),callback_data=f'local_{item}_{id}'))
+        inline_keyboard = types.InlineKeyboardMarkup(row_width=2)
+        # for item in tree_dict[global_class_name]:
+        #     inline_keyboard.add(types.InlineKeyboardButton(text=get_translate(item),callback_data=f'local_{item}_{id}'))
+
+        inline_keyboard.add(*[types.InlineKeyboardButton(text=get_translate(item),callback_data=f'local_{item}_{id}') for item in tree_dict[global_class_name]])
         return inline_keyboard
 
 
