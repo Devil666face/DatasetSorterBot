@@ -20,9 +20,10 @@ class Keyboards:
 
     def create_global_selector(self, photo_path):
         id = self.db.get_photo_id_by_path(photo_path)
-        inline_keyboard = types.InlineKeyboardMarkup()
+        inline_keyboard = types.InlineKeyboardMarkup(row_width=3)
+        
         for key in tree_dict:
-            inline_keyboard.add(types.InlineKeyboardButton(text=get_translate(key),callback_data=f'global_{key}_{id}'))
+            inline_keyboard.add(*[types.InlineKeyboardButton(text=get_translate(key),callback_data=f'global_{key}_{id}')])
         return inline_keyboard
 
     def create_local_selector(self, id, global_class_name):
