@@ -3,6 +3,7 @@
 *.png
 *.bmp
 *.gif
+/venv
 /__pycache__
 /build
 bot.tar.gz
